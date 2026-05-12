@@ -1,0 +1,20 @@
+# Virtual environment
+.venv/
+
+# Python cache
+__pycache__/
+
+# Jupyter checkpoints
+.ipynb_checkpoints/
+
+# Output files
+outputs/
+
+# CSV files
+*.csv
+
+# Model files
+models/
+
+# Hugging Face cache
+.cache/
