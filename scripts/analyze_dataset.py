@@ -72,7 +72,7 @@ except Exception:
 # Configuration
 # =========================================================
 
-DATASET_PATH = "data/prompt_quality_dataset.json"
+DATASET_PATH = "../data/prompt_quality_dataset_cleaned.json"
 ALLOWED_TASKS = {
     "classification",
     "information_extraction",
@@ -213,30 +213,6 @@ for t, counts in task_score_counts.items():
     else:
         avg = float("nan")
     avg_score_per_task[t] = avg
-
-
-# =========================================================
-# Reference quality checks
-# - submissions longer than reference
-# - submissions identical to reference
-# - potentially weak references (reference score != 4 or short)
-# =========================================================
-
-subs_longer_than_ref = 0
-identical_submission_reference = 0
-potentially_weak_references = 0
-
-for r in data:
-    ref = clean_text(r.get("reference"))
-    sub = clean_text(r.get("submission"))
-    sc = r.get("score")
-    if len(sub.split()) > len(ref.split()):
-        subs_longer_than_ref += 1
-    if sub == ref:
-        identical_submission_reference += 1
-    # heuristic: reference should normally be long enough and scored 4
-    if not isinstance(sc, int) or sc != 4 or len(ref.split()) < 6:
-        potentially_weak_references += 1
 
 
 # =========================================================
